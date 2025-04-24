@@ -5,7 +5,8 @@ mod calculator;
 
 use calculator::Calculator;
 use traits::{AdditiveOperations, MultiplicativeOperations, BinaryOperations};
-
+//TODO: - The “Calculator” can be printed through the following line of code `println!("calculator: {}", calculator);`
+//TODO: - When printing the calculator, the result shows the result for each operation.
 impl Display for Calculator {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{} {}", self.num1, self.num2)
@@ -19,7 +20,8 @@ impl Calculator {
             num2: 0,
         }
     }
-
+//TODO: confirm Add a print_output function which needs a single input parameter with the 3 defined traits:  AdditiveOperations, MultiplicativeOperations , BinaryOperations 
+//This function should print every operations’ results for the given input.
     pub fn print_output<T: AdditiveOperations + MultiplicativeOperations + BinaryOperations>(&self, calculator: &T) {
         println!("Additive Operations:");
         println!("  {} + {} = {}", self.num1, self.num2, calculator.add(self.num1, self.num2));
