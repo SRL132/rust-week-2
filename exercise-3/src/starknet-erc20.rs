@@ -16,7 +16,7 @@ An in-depth analysis of the contract. Comments should be added to the code snipp
 
 #[starknet::interface] //Defines an interface for the ERC20 token
 pub trait IERC20<TContractState> {
-    fn get_name(self: @TContractState) -> felt252;
+    fn get_name(self: @TContractState) -> felt252; //a felt252 is a 252-bit integer that represents an element in a finite field, which is a mathematical concept used in zero-knowledge proofs and cryptography.
     fn get_symbol(self: @TContractState) -> felt252;
     fn get_decimals(self: @TContractState) -> u8;
     fn get_total_supply(self: @TContractState) -> felt252; // The @ symbol in Cairo is similar to & in Rust - it indicates a reference.
@@ -52,7 +52,7 @@ pub mod SimpleVault {
     use starknet::{ContractAddress, get_caller_address, get_contract_address}; //Imports the ContractAddress, get_caller_address, and get_contract_address functions from the starknet module
 
     #[storage]
-    struct Storage {
+    struct Storage {//Defines a struct for the storage of the SimpleVault contract
         token: IERC20Dispatcher,
         total_supply: u256,
         balance_of: LegacyMap<ContractAddress, u256>
@@ -60,10 +60,10 @@ pub mod SimpleVault {
 
     #[constructor] //Defines a constructor for the SimpleVault contract
     fn constructor(ref self: ContractState, token: ContractAddress) {
-        self.token.write(IERC20Dispatcher { contract_address: token });
+        self.token.write(IERC20Dispatcher { contract_address: token }); //Writes the token address to the token field of the storage
     }
 
-    #[generate_trait]
+    #[generate_trait] //Defines a trait for the private functions of the SimpleVault contract
     impl PrivateFunctions of PrivateFunctionsTrait {
         fn _mint(ref self: ContractState, to: ContractAddress, shares: u256) {
             //update total supply and balance of to

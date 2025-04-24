@@ -85,7 +85,7 @@ impl Contract {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::*; //Imports the Contract struct and its methods
 
     #[test]
     fn add_message() {
